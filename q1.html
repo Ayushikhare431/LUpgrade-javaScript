@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day6 assignment /q1</title>
+</head>
+<style>
+    *{
+        margin: 0%;
+        padding: 0%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container{
+        background-color: lightgray;
+        width: 75%;
+        height: 90vh;
+       display: inline-block;
+       margin-top: 25px;
+       margin-left: 10%;
+    }
+
+     h1{
+        margin-left: 20px;
+        margin-top: 10px;
+        font-size: 40px;
+        } 
+ .table{
+        margin-top: 50px; 
+       width: 90%;
+       margin-left: 5%;
+       }
+
+    td,th{
+        
+        height: 50px;
+        width: 10px;
+        text-align: center;
+    }
+   .btn{
+       padding: 5px;
+       font-size: 15px;
+ }
+ .form{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+      }
+ input{
+    text-indent: 12px; 
+    padding: 8px;
+    margin: 7px;
+    font-size: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+ }
+
+</style>
+
+<body>
+
+
+    <!--   
+    Question 1
+    Create a array containing five objects with properties { name, age , city , salary }
+    A. Display all the objects in a table
+    B. Create a search functionality for name and city
+    C. Delete button to delete records
+    D. Data is not permanent -->
+
+
+    <div class="container">
+        <h1>Employees</h1>
+        <form class="form">
+            <input type="text" onkeyup="searchByName()" placeholder="search by name" id="name"/>
+            <input type="text" onkeyup="searchByCity()" placeholder="search by city" id="city"/>
+        </form>
+        <div>
+            <table  :  border="1" cellspacing="0" id="table"  class="table">
+                <thead>
+                    <tr>
+                        <th>Sr.no</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>City</th>
+                        <th>Salary</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let employees = [
+            {
+                name: "ayushi",
+                age: 21,
+                city: "jabalpur",
+                salary: 20000,
+            },
+            {
+                name: "ayush",
+                age: 20,
+                city: "jabalpur",
+                salary: 10000,
+            },
+            {
+                name: "biliyansh",
+                age: 20,
+                city: "taradehi",
+                salary: 15000,
+            },
+            {
+                name: "pushpa",
+                age: 23,
+                city: "illahbad",
+                salary: 19000,
+            },
+            {
+                name: "richa",
+                age: 25,
+                city: "indore",
+                salary: 20000,
+            },
+
+        ];
+
+        // Function to display objects
+
+        function display(superEmployees){
+            let tableData=" ";
+
+            superEmployees.forEach(function(employee,index){
+                let currentRow=`
+            <tr>
+            <td>${index+1}</td>
+            <td>${employee.name}</td>
+            <td>${employee.age}</td>
+            <td>${employee.city}</td>
+            <td>${employee.salary}</td>
+            <td><button class="btn" onClick="deleteRecords()">Delete</button></td>
+           </tr> `;
+            tableData += currentRow;
+
+            });
+            document.getElementsByClassName("tbody")[0].innerHTML=tableData;
+           
+        };
+
+         display(employees);
+
+         //Function to delete records
+
+         function deleteRecords(index){
+             employees.splice(index,1);
+           display(employees);
+            }
+
+        //Function to search by Name
+
+        function searchByName(){
+         const searchName=document.getElementById("name").value  ;
+         let Sname=employees.filter(function(employee){
+             return employee.name.toUpperCase().indexOf(searchName.toUpperCase())!=-1;
+            });
+         
+           display(Sname);
+        }
+
+        
+        //Function to search by city
+
+        function searchByCity(){
+            const searchCity=document.getElementById("city").value  ;
+            let Scity=employees.filter(function(employee){
+                return employee.city.toLowerCase().indexOf(searchCity.toLowerCase())!=-1;
+            });
+           display(Scity);
+         }
+
+</script>
+</body>
+
+</html>
